@@ -4,8 +4,7 @@ sudo pip install pillow
 sudo pip install opencv_contrib_python
 sudo apt-get install libhdf5-dev
 sudo apt-get update
-sudo apt-get install libhdf5-dev
-sudo apt-get update
 sudo apt-get install libhdf5-serial-dev
 sudo apt install libqt4-test
+sudo apt install libqtgui4
 
