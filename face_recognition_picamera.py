@@ -7,7 +7,11 @@ try:
     # use the trainer.yml file that was created with face_trainer.py
     recognizer = cv2.face.LBPHFaceRecognizer_create()
     recognizer.read('trainer/trainer.yml')
+    
+    # set the Haar Cascade used for detecting faces
     face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+    
+    # set the font for displaying names
     font = cv2.FONT_HERSHEY_SIMPLEX
 
     # id counter
@@ -41,7 +45,10 @@ try:
         for (x, y, w, h) in faces:
             cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
             
-            id, confidence = recognizer.predict(gray[y:y + h, x:x + w])
+            # save just the face roi on the gray image
+            roi_gray = gray[y:y + h, x:x + w]
+            
+            id, confidence = recognizer.predict(roi_gray)
         
             # Check if confidence is less them 100 ==> "0" is perfect match 
             if (confidence < 100):
@@ -51,7 +58,7 @@ try:
                 id = "unknown"
                 confidence = "  {0}%".format(round(100 - confidence))
         
-            cv2.putText(img, str(id), (x + 5,y - 5), font, 1, (255, 255, 255), 2)
+            cv2.putText(img, str(id), (x + 5, y - 5), font, 1, (255, 255, 255), 2)
             cv2.putText(img, str(confidence), (x + 5, y + h - 5), font, 1, (255, 255, 0), 1)  
     
         cv2.imshow('camera',img) 
