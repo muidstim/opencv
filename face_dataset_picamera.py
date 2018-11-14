@@ -9,7 +9,6 @@ try:
     face_id = input('\n Enter user id end press <return> ==>  ')
     print("\n [INFO] Initializing face capture. Look the camera and press 'c' to take each photo.")
 
-
     # initialize the camera and grab a reference to the raw camera capture
     camera = PiCamera()
     camera.resolution = (640, 480)
@@ -40,13 +39,16 @@ try:
             
             # save just the face roi on the gray image
             roi_gray = gray[y:y + h, x:x + w]
-            #roi_color = img[y:y + h, x:x + w]
             
             # check for the user to pressed the 'c' key
             key = cv2.waitKey(100) & 0xff
             if key == ord("c"):
                 # save the gray face to a file in the dataset folder called User1.jpg, User2.jpg etc.
-                cv2.imwrite("dataset/User." + str(face_id) + '.' + str(count) + ".jpg", roi_gray)
+                filename = "dataset/User." + str(face_id) + '.' + str(count) + ".jpg"
+                
+                cv2.imwrite(filename, roi_gray)
+                
+                print(filename, "saved!")
                 
                 count += 1
         
@@ -62,7 +64,9 @@ try:
         if key == ord("q"):
             break
         elif count >= 30: # break from the loop after 30 faces have been saved
+            print("30 faces saved!")
             break
 	    
 finally:
     cv2.destroyAllWindows()
+    print("done.")
