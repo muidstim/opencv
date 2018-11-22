@@ -1,0 +1,5 @@
+sudo pip install --upgrade google-cloud-pubsub
+
+sudo pip install --upgrade oauth2client
+
+pip install google-cloud-texttospeech
