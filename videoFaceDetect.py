@@ -30,8 +30,8 @@ try:
         #loop through all the faces found and draw rectangles around them
         for (x, y, w, h) in faces:
             cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
-            #roi_gray = gray[y:y + h, x:x + w]
-            #roi_color = img[y:y + h, x:x + w]
+            #face_gray = gray[y:y + h, x:x + w]
+            #face_color = img[y:y + h, x:x + w]
             
         # show the frame
         cv2.imshow("Frame", img)
